@@ -1,1 +1,6 @@
-API_TOKEN = '8653537841:AAGyJ2yjUtMYSF_E6Y1u8pi0f5K9q6jqsUo'
+import os
+import telebot
+from telebot import types
+
+API_TOKEN = os.getenv("8653537841:AAGyJ2yjUtMYSF_E6Y1u8pi0f5K9q6jqsUo")
+SECOND_CHANNEL_URL = 'https://t.me/yourlink'
