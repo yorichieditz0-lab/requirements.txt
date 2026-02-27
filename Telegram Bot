@@ -1,0 +1,31 @@
+import telebot
+from telebot import types
+
+# --- CONFIGURATION ---
+API_TOKEN = '8653537841:AAGyJ2yjUtMYSF_E6Y1u8pi0f5K9q6jqsUo'
+SECOND_CHANNEL_URL = 'https://t.me/+BsO5J2a5GnMzYTU1'
+
+bot = telebot.TeleBot(API_TOKEN)
+
+@bot.chat_join_request_handler()
+def handle_join_request(message):
+    user_id = message.from_user.id
+    user_name = message.from_user.first_name
+
+    # 1. Create the button
+    markup = types.InlineKeyboardMarkup()
+    btn = types.InlineKeyboardButton(text="Claim Your Salary Here 💰", url=SECOND_CHANNEL_URL)
+    markup.add(btn)
+
+    # 2. The message text
+    text = f"Hello {user_name}!\n\nClick the button below to proceed:"
+
+    try:
+        # 3. Send the message with the button
+        bot.send_message(user_id, text, reply_markup=markup)
+        print(f"✅ Button sent to {user_name}")
+    except Exception as e:
+        print(f"⚠️ Error: {e}. User may need to /start the bot first.")
+
+print("🚀 Bot is running with the Claim button...")
+bot.infinity_polling()
